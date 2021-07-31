@@ -4,4 +4,6 @@
 
 set "scale_intervals(major)" "w w h w w w h"
 set "scale_interval(minor)" "w h w w h w w"
+set "scale_interval(melodic_minor)" "w h w w w w h"
 set "scale_interval(harmonic_minor)" "w h w w h w h h"
+set "scale_interval(diminished)" "w h w h w h w h"
