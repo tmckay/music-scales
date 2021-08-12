@@ -37,3 +37,6 @@ class Scale:
 
 major = Scale('w w h w w w h')
 print(major.in_key('c'))
+
+minor = Scale('w h w w h w w')
+print(minor.in_key('c'))
