@@ -40,3 +40,6 @@ print(major.in_key('c'))
 
 minor = Scale('w h w w h w w')
 print(minor.in_key('c'))
+
+harmonic_minor = Scale('w h w w h w h h')
+print(harmonic_minor.in_key('c'))
