@@ -27,6 +27,8 @@ class Scale:
                 idx += 2
             elif step == 'h':
                 idx += 1
+            elif step == 'w+h':
+                idx += 3
             else:
                 raise ValueError(f'Incorrect value "{step}" for scale interval')
 
@@ -41,5 +43,5 @@ print(major.in_key('c'))
 minor = Scale('w h w w h w w')
 print(minor.in_key('c'))
 
-harmonic_minor = Scale('w h w w h w h h')
+harmonic_minor = Scale('w h w w h w+h h')
 print(harmonic_minor.in_key('c'))
