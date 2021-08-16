@@ -7,6 +7,13 @@ class Note:
 
 
 class Scale:
+
+    interval_to_steps = {
+        'h': 1,
+        'w': 2,
+        'w+h': 3
+    }
+
     def __init__(self, intervals):
         self._intervals = intervals.split()
 
@@ -23,14 +30,10 @@ class Scale:
         for step in self._intervals:
             key_notes.append(notes[idx])
 
-            if step == 'w':
-                idx += 2
-            elif step == 'h':
-                idx += 1
-            elif step == 'w+h':
-                idx += 3
-            else:
+            if step not in self.interval_to_steps:
                 raise ValueError(f'Incorrect value "{step}" for scale interval')
+            else:
+                idx += self.interval_to_steps[step]
 
             idx = idx % len(notes)
 
