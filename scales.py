@@ -65,6 +65,18 @@ print(major.with_intervals('c'))
 
 minor = Scale('w h w w h w w')
 print(minor.in_key('c'))
+print(minor.with_intervals('c'))
 
 harmonic_minor = Scale('w h w w h w+h h')
 print(harmonic_minor.in_key('c'))
+print(harmonic_minor.with_intervals('c'))
+
+major_pentatonic = Scale('w w w+h w w+h')
+print(major_pentatonic.in_key('c'))
+print(major_pentatonic.with_intervals('c'))
+
+minor_pentatonic = Scale('w+h w w w+h w')
+print(minor_pentatonic.in_key('c'))
+print(minor_pentatonic.with_intervals('c'))
+print(minor_pentatonic.with_intervals('a'))
+
