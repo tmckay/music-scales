@@ -83,3 +83,7 @@ print(minor_pentatonic.with_intervals('a'))
 dorian = Scale('w h w w w h w')
 print(dorian.in_key('c'))
 print(dorian.with_intervals('c'))
+
+phrygian = Scale('h w w w h w w')
+print(phrygian.in_key('c'))
+print(phrygian.with_intervals('c'))
