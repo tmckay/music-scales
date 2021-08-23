@@ -87,3 +87,7 @@ print(dorian.with_intervals('c'))
 phrygian = Scale('h w w w h w w')
 print(phrygian.in_key('c'))
 print(phrygian.with_intervals('c'))
+
+mixolydian = Scale('w w h w w h w')
+print(mixolydian.in_key('c'))
+print(mixolydian.with_intervals('c'))
