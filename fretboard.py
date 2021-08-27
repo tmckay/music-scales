@@ -1,3 +1,6 @@
+from collections import deque
+import math
+
 from __init__ import SCALES
 from constants import NOTES
 
@@ -32,9 +35,18 @@ class Fretboard:
                 note_idx = note_idx % len(notes)
             return fret
 
-        return find_fret_for_note('e', scale.in_key('c')[1].split('/')[0])
+        def are_frets_in_limit(fret_a, fret_b, limit):
+            return math.abs(fret_b - fret_a) <= limit
+
+        queue = deque([(self.tuning[0], scale[0])])
+        frets = []
+        while len(queue) > 0:
+            target = queue.pop()
+            frets.append(find_fret_for_note(target[0], target[1]))
+        
+        return frets
 
 
 if __name__ == '__main__':
     fb = Fretboard()
-    print(fb.find_scale(SCALES[0]))
+    print(fb.find_scale(SCALES[0].in_key('c')))
