@@ -15,7 +15,7 @@ class Fretboard:
         def find_fret_for_note(open_note, target_note):
             print(f'looking for {target_note} on open string {open_note}')
             notes = NOTES.split()
-            open_note_idx = -1 
+            open_note_idx = -1
             for idx, note in enumerate(notes):
                 sub_notes = note.split('/')
 
@@ -38,15 +38,27 @@ class Fretboard:
         def are_frets_in_limit(fret_a, fret_b, limit):
             return math.abs(fret_b - fret_a) <= limit
 
-        queue = deque([(self.tuning[0], scale[0])])
         frets = []
-        while len(queue) > 0:
-            target = queue.pop()
-            frets.append(find_fret_for_note(target[0], target[1]))
-        
+        queue = deque()
+        for note in scale:
+            note = note.split('/')[0]
+            print(f'note in scale {note}')
+            queue.append((0, note))
+            while len(queue) > 0:
+                target = queue.popleft()
+                result = find_fret_for_note(self.tuning[target[0]], target[1])
+
+                if len(frets) > 0 and \
+                    (abs(result - frets[-1][1]) > fret_reach_limit or\
+                    abs(target[0] - frets[-1][0]) > 1):
+                        queue.append((target[0] + 1, target[1]))
+                else:
+                    frets.append((target[0], result, target[1]))
+
         return frets
 
 
 if __name__ == '__main__':
     fb = Fretboard()
+    print(SCALES[0].name)
     print(fb.find_scale(SCALES[0].in_key('c')))
