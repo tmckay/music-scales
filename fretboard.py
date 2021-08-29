@@ -11,7 +11,8 @@ class Fretboard:
         self.tuning = tuning
         self.number_frets = number_frets
 
-    def find_scale(self, scale, fret_reach_limit=3):
+    def find_scale(self, scale, starting_string=0, fret_reach_limit=3):
+        """starting_string is index of string in tuning"""
         def find_fret_for_note(open_note, target_note):
             print(f'looking for {target_note} on open string {open_note}')
             notes = NOTES.split()
@@ -43,7 +44,7 @@ class Fretboard:
         for note in scale:
             note = note.split('/')[0]
             print(f'note in scale {note}')
-            queue.append((0, note))
+            queue.append((starting_string, note))
             while len(queue) > 0:
                 target = queue.popleft()
                 result = find_fret_for_note(self.tuning[target[0]], target[1])
@@ -62,3 +63,4 @@ if __name__ == '__main__':
     fb = Fretboard()
     print(SCALES[0].name)
     print(fb.find_scale(SCALES[0].in_key('c')))
+    print(fb.find_scale(SCALES[0].in_key('c'), starting_string=3))
