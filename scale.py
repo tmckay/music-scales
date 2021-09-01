@@ -1,3 +1,5 @@
+from typing import List, Tuple
+
 from constants import NOTES, DEGREES
 
 
@@ -10,15 +12,15 @@ class Scale:
         '3h': 3,
     }
 
-    def __init__(self, name, intervals, mode=None):
+    def __init__(self, name: str, intervals: str, mode: str = None):
         self.name = name
         self.intervals = intervals.split()
         self.mode = mode 
 
-    def in_key(self, key):
+    def in_key(self, key: str) -> List[str]:
         return [step[0] for step in self.with_degrees(key)]
 
-    def with_degrees(self, key):
+    def with_degrees(self, key: str) -> List[Tuple[str, str]]:
         notes = NOTES.split()
 
         if key not in notes:
