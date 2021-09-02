@@ -1,6 +1,6 @@
 from typing import List, Tuple
 
-from constants import NOTES, DEGREES
+from constants import NOTES, DEGREES, Degrees
 
 
 class Scale:
