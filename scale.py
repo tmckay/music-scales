@@ -4,6 +4,7 @@ from constants import NOTES, DEGREES, Degrees
 
 
 class Scale:
+    """A musical scale"""
 
     interval_to_steps = {
         'h': 1,
@@ -13,14 +14,31 @@ class Scale:
     }
 
     def __init__(self, name: str, intervals: str, mode: str = None):
+        """
+        Args:
+            name: name of the scale e.g. minor pentatonic
+            intervals: scale intervals as 'w h' etc
+            mode: name of the mode associated with the scale
+        """
+
         self.name = name
         self.intervals = intervals.split()
         self.mode = mode 
 
     def in_key(self, key: str) -> List[str]:
+        """Generates the notes for the scale in the specified key
+
+        Args:
+            key: the key of the scale to generate e.g. 'c' or 'd'
+        """
         return [step[0] for step in self.with_degrees(key)]
 
     def with_degrees(self, key: str) -> List[Tuple[str, str]]:
+        """Generate notes of scale and include degrees e.g. 'major third'
+
+        Args:
+            key: the key of the scale to generate e.g. 'c' or 'd'
+        """
         notes = NOTES.split()
 
         if key not in notes:
