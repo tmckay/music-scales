@@ -1,18 +1,20 @@
 from collections import deque
 import math
+from typing import List, Tuple
 
 from __init__ import SCALES
 from constants import NOTES
+from scale import Scale
 
 
 class Fretboard:
 
-    def __init__(self, tuning=['e', 'a', 'd', 'g', 'b', 'e'], number_frets=24):
+    def __init__(self, tuning: List = ['e', 'a', 'd', 'g', 'b', 'e'], number_frets: int = 24):
         self.tuning = tuning
         self.number_frets = number_frets
 
     @staticmethod
-    def find_fret_for_note(open_note, target_note):
+    def find_fret_for_note(open_note: str, target_note: str) -> int:
         notes = NOTES.split()
         open_note_idx = -1
         for idx, note in enumerate(notes):
@@ -35,10 +37,10 @@ class Fretboard:
         return fret
 
     @staticmethod
-    def are_frets_in_limit(fret_a, fret_b, limit):
+    def are_frets_in_limit(fret_a: str, fret_b: str , limit: int) -> bool:
         return abs(fret_b - fret_a) <= limit
 
-    def find_scale(self, scale, starting_string=0, fret_reach_limit=3):
+    def find_scale(self, scale: Scale, starting_string: int = 0, fret_reach_limit: int = 3) -> List[Tuple]:
         """starting_string is index of string in tuning"""
         frets = []
         queue = deque()
