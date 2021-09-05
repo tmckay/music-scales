@@ -1,3 +1,6 @@
+from enum import Enum
+
+
 NOTES = 'c c♯/d♭ d d♯/e♭ e f f#/g♭ g g#/a♭ a a#/b♭ b'
 DEGREES = (
     'unison', 'minor second', 'major second', 'minor third',

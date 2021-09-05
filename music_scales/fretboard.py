@@ -37,7 +37,7 @@ class Fretboard:
         return fret
 
     @staticmethod
-    def are_frets_in_limit(fret_a: str, fret_b: str , limit: int) -> bool:
+    def are_frets_in_limit(fret_a: int, fret_b: int , limit: int) -> bool:
         return abs(fret_b - fret_a) <= limit
 
     def find_scale(self, scale: Scale, starting_string: int = 0, fret_reach_limit: int = 3) -> List[Tuple]:
