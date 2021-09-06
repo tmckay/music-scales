@@ -1,6 +1,6 @@
 from typing import List, Tuple
 
-from constants import NOTES, DEGREES, Degrees
+from . import constants
 
 
 class Scale:
@@ -39,7 +39,7 @@ class Scale:
         Args:
             key: the key of the scale to generate e.g. 'c' or 'd'
         """
-        notes = NOTES.split()
+        notes = constants.NOTES.split()
 
         if key not in notes:
             raise ValueError(f'"{key}" is not a valid key')
@@ -50,7 +50,7 @@ class Scale:
         key_notes = []
 
         for step in self.intervals:
-            key_notes.append((notes[notes_idx], DEGREES[intervals_idx]))
+            key_notes.append((notes[notes_idx], constants.DEGREES[intervals_idx]))
 
             if step not in self.interval_to_steps:
                 raise ValueError(f'Incorrect value "{step}" for scale interval')

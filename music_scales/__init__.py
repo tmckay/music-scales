@@ -1,4 +1,6 @@
-from scale import Scale
+"""Provides music theory objects"""
+
+from .scale import Scale
 
 
 SCALES = [

@@ -1,10 +1,11 @@
+"""Guitar fretboard object"""
+
 from collections import deque
 import math
-from typing import List, Tuple
+from typing import Deque, List, Tuple
 
-from __init__ import SCALES
-from constants import NOTES
-from scale import Scale
+from . import SCALES, constants
+from .scale import Scale
 
 
 class Fretboard:
@@ -15,7 +16,7 @@ class Fretboard:
 
     @staticmethod
     def find_fret_for_note(open_note: str, target_note: str) -> int:
-        notes = NOTES.split()
+        notes = constants.NOTES.split()
         open_note_idx = -1
         for idx, note in enumerate(notes):
             sub_notes = note.split('/')
@@ -40,10 +41,14 @@ class Fretboard:
     def are_frets_in_limit(fret_a: int, fret_b: int , limit: int) -> bool:
         return abs(fret_b - fret_a) <= limit
 
-    def find_scale(self, scale: Scale, starting_string: int = 0, fret_reach_limit: int = 3) -> List[Tuple]:
+    def find_scale(
+        self,
+        scale: Scale,
+        starting_string: int = 0,
+        fret_reach_limit: int = 3) -> List[Tuple]:
         """starting_string is index of string in tuning"""
-        frets = []
-        queue = deque()
+        frets: List[Tuple] = []
+        queue: Deque[Tuple] = deque()
         for note in scale:
             note = note.split('/')[0]
             queue.append((starting_string, note))
@@ -54,7 +59,7 @@ class Fretboard:
                 if len(frets) > 0 and \
                     (not self.are_frets_in_limit(result, frets[-1][1], fret_reach_limit) or\
                     abs(target[0] - frets[-1][0]) > 1):
-                        queue.append((target[0] + 1, target[1]))
+                    queue.append((target[0] + 1, target[1]))
                 else:
                     frets.append((target[0], result, target[1]))
 
@@ -65,6 +70,14 @@ if __name__ == '__main__':
     fb = Fretboard()
     print(SCALES[0].name)
     frets_for_scale = fb.find_scale(SCALES[0].in_key('c'))
-    assert frets_for_scale == [(0, 8, 'c'), (0, 11, 'd♯'), (1, 8, 'f'), (1, 9, 'f#'), (1, 10, 'g'), (2, 8, 'a#'), (2, 10, 'c')]
+    assert frets_for_scale == [
+        (0, 8, 'c'),
+        (0, 11, 'd♯'),
+        (1, 8, 'f'),
+        (1, 9, 'f#'),
+        (1, 10, 'g'),
+        (2, 8, 'a#'),
+        (2, 10, 'c')
+    ]
     print(frets_for_scale)
     print(fb.find_scale(SCALES[0].in_key('c'), starting_string=2))
