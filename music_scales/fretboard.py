@@ -9,13 +9,16 @@ from .scale import Scale
 
 
 class Fretboard:
+    """Represents a guitar fretboard on a standard 6-string guitar.
+    You can pass different tunings, but the default is standard tuning."""
 
-    def __init__(self, tuning: List = ['e', 'a', 'd', 'g', 'b', 'e'], number_frets: int = 24):
+    def __init__(self, tuning: Tuple = ('e', 'a', 'd', 'g', 'b', 'e'), number_frets: int = 24):
         self.tuning = tuning
         self.number_frets = number_frets
 
     @staticmethod
     def find_fret_for_note(open_note: str, target_note: str) -> int:
+        """Look for a note and return the fret number for it"""
         notes = constants.NOTES.split()
         open_note_idx = -1
         for idx, note in enumerate(notes):
@@ -39,6 +42,7 @@ class Fretboard:
 
     @staticmethod
     def are_frets_in_limit(fret_a: int, fret_b: int , limit: int) -> bool:
+        """Return if two frets are within a certain distance"""
         return abs(fret_b - fret_a) <= limit
 
     def find_scale(
