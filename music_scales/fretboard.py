@@ -1,11 +1,9 @@
 """Guitar fretboard object"""
 
 from collections import deque
-import math
 from typing import Deque, List, Tuple
 
 from . import SCALES, constants
-from .scale import Scale
 
 
 class Fretboard:
@@ -47,7 +45,7 @@ class Fretboard:
 
     def find_scale(
         self,
-        scale: Scale,
+        scale: List[str],
         starting_string: int = 0,
         fret_reach_limit: int = 3) -> List[Tuple]:
         """starting_string is index of string in tuning"""

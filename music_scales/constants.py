@@ -1,3 +1,5 @@
+"""Constant values for package"""
+
 from enum import Enum
 
 
@@ -10,6 +12,7 @@ DEGREES = (
 )
 
 class Degree(Enum):
+    """Degrees of a scale"""
     UNISON = 'unison'
     MINOR_SECOND = 'minor second'
     MAJOR_SECOND = 'major second'

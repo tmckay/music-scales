@@ -1,3 +1,5 @@
+"""Module for representing a musical scale"""
+
 from typing import List, Tuple
 
 from . import constants
@@ -23,7 +25,7 @@ class Scale:
 
         self.name = name
         self.intervals = intervals.split()
-        self.mode = mode 
+        self.mode = mode
 
     def in_key(self, key: str) -> List[str]:
         """Generates the notes for the scale in the specified key
@@ -54,10 +56,10 @@ class Scale:
 
             if step not in self.interval_to_steps:
                 raise ValueError(f'Incorrect value "{step}" for scale interval')
-            else:
-                next_step = self.interval_to_steps[step]
-                notes_idx += next_step
-                intervals_idx += next_step
+
+            next_step = self.interval_to_steps[step]
+            notes_idx += next_step
+            intervals_idx += next_step
 
             notes_idx = notes_idx % len(notes)
 
