@@ -3,7 +3,7 @@
 from collections import deque
 from typing import Deque, List, Tuple
 
-from . import SCALES, constants
+from music_scales.constants import NOTES
 
 
 class Fretboard:
@@ -17,7 +17,7 @@ class Fretboard:
     @staticmethod
     def find_fret_for_note(open_note: str, target_note: str) -> int:
         """Look for a note and return the fret number for it"""
-        notes = constants.NOTES.split()
+        notes = NOTES.split()
         open_note_idx = -1
         for idx, note in enumerate(notes):
             sub_notes = note.split('/')
@@ -66,20 +66,3 @@ class Fretboard:
                     frets.append((target[0], result, target[1]))
 
         return frets
-
-
-if __name__ == '__main__':
-    fb = Fretboard()
-    print(SCALES[0].name)
-    frets_for_scale = fb.find_scale(SCALES[0].in_key('c'))
-    assert frets_for_scale == [
-        (0, 8, 'c'),
-        (0, 11, 'd♯'),
-        (1, 8, 'f'),
-        (1, 9, 'f#'),
-        (1, 10, 'g'),
-        (2, 8, 'a#'),
-        (2, 10, 'c')
-    ]
-    print(frets_for_scale)
-    print(fb.find_scale(SCALES[0].in_key('c'), starting_string=2))
