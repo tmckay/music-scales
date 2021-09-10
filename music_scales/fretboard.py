@@ -3,14 +3,17 @@
 from collections import deque
 from typing import Deque, List, Tuple
 
-from music_scales.constants import NOTES
+from .constants import NOTES, Tuning
 
 
 class Fretboard:
     """Represents a guitar fretboard on a standard 6-string guitar.
     You can pass different tunings, but the default is standard tuning."""
 
-    def __init__(self, tuning: Tuple = ('e', 'a', 'd', 'g', 'b', 'e'), number_frets: int = 24):
+    def __init__(self,
+                 tuning: Tuple = Tuning.STANDARD,
+                 number_frets: int = 24
+        ):
         self.tuning = tuning
         self.number_frets = number_frets
 

@@ -11,6 +11,12 @@ DEGREES = (
     'major seventh', 'octave'
 )
 
+
+class Tuning:
+    """Guitar tunings"""
+    STANDARD = ('e', 'a', 'd', 'g', 'b', 'e')
+
+
 class Degree(Enum):
     """Degrees of a scale"""
     UNISON = 'unison'
