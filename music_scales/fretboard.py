@@ -19,26 +19,27 @@ class Fretboard:
 
     @staticmethod
     def find_fret_for_note(open_note: str, target_note: str) -> int:
-        """Look for a note and return the fret number for it"""
-        notes = NOTES.split()
-        open_note_idx = -1
-        for idx, note in enumerate(notes):
-            sub_notes = note.split('/')
+        """Look for a note and return the fret number for it
 
-            if open_note in sub_notes:
-                open_note_idx = idx
+        open_note: the note of the string on the guitar at fret 0 aka open
+        target_note: the note to find on the string
+        """
 
-        fret = None
-        fret_idx = 0
-        note_idx = open_note_idx
-        while fret is None:
-            if target_note in notes[note_idx].split('/'):
-                fret = fret_idx
-            else:
-                note_idx += 1
-                fret_idx += 1
+        # Find open note within notes sequence
+        for idx, note in enumerate(NOTES):
+            if open_note == note:
+                note_idx = idx
 
-            note_idx = note_idx % len(notes)
+        # Find fret of note on string
+        fret = -1
+        while fret < 0:
+            if target_note == NOTES[note_idx]:
+                break
+
+            note_idx += 1
+            fret += 1
+            note_idx = note_idx % len(NOTES)
+
         return fret
 
     @staticmethod
@@ -55,7 +56,6 @@ class Fretboard:
         frets: List[Tuple] = []
         queue: Deque[Tuple] = deque()
         for note in scale:
-            note = note.split('/')[0]
             queue.append((starting_string, note))
             while len(queue) > 0:
                 target = queue.popleft()

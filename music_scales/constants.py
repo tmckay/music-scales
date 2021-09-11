@@ -2,8 +2,26 @@
 
 from enum import Enum
 
+from .note import Note
 
-NOTES = 'c c♯/d♭ d d♯/e♭ e f f#/g♭ g g#/a♭ a a#/b♭ b'
+
+#NOTES = 'c c♯/d♭ d d♯/e♭ e f f#/g♭ g g#/a♭ a a#/b♭ b'.split()
+NOTES = [
+    Note('c'),
+    Note('c♯/d♭'),
+    Note('d'),
+    Note('d♯/e♭'),
+    Note('e'),
+    Note('f'),
+    Note('f#/g♭'),
+    Note('g'),
+    Note('g#/a♭'),
+    Note('a'),
+    Note('a#/b♭'),
+    Note('b')
+]
+
+
 DEGREES = (
     'unison', 'minor second', 'major second', 'minor third',
     'major third', 'perfect fourth', 'diminished fifth',
