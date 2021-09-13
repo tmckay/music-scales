@@ -1,5 +1,6 @@
 """Provides music theory objects"""
 
+from .note import Note
 from .scale import Scale
 
 
@@ -20,5 +21,5 @@ SCALES = [
 
 if __name__ == '__main__':
     for scale in SCALES:
-        print(scale.in_key('c'))
-        print(scale.with_degrees('c'))
+        print(scale.in_key(Note('c')))
+        print(scale.with_degrees(Note('c')))

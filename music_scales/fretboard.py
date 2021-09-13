@@ -4,6 +4,7 @@ from collections import deque
 from typing import Deque, List, Tuple
 
 from .constants import NOTES, Tuning
+from .note import Note
 
 
 class Fretboard:
@@ -18,7 +19,7 @@ class Fretboard:
         self.number_frets = number_frets
 
     @staticmethod
-    def find_fret_for_note(open_note: str, target_note: str) -> int:
+    def find_fret_for_note(open_note: Note, target_note: Note) -> int:
         """Look for a note and return the fret number for it
 
         open_note: the note of the string on the guitar at fret 0 aka open
@@ -31,8 +32,8 @@ class Fretboard:
                 note_idx = idx
 
         # Find fret of note on string
-        fret = -1
-        while fret < 0:
+        fret = 0
+        while True:
             if target_note == NOTES[note_idx]:
                 break
 

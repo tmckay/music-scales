@@ -28,7 +28,7 @@ class Scale:
         self.intervals = intervals.split()
         self.mode = mode
 
-    def in_key(self, key: str) -> List[Note]:
+    def in_key(self, key: Note) -> List[Note]:
         """Generates the notes for the scale in the specified key
 
         Args:
@@ -36,7 +36,7 @@ class Scale:
         """
         return [step[0] for step in self.with_degrees(key)]
 
-    def with_degrees(self, key: str) -> List[Tuple[Note, str]]:
+    def with_degrees(self, key: Note) -> List[Tuple[Note, str]]:
         """Generate notes of scale and include degrees e.g. 'major third'
 
         Args:
@@ -45,7 +45,7 @@ class Scale:
         if key not in NOTES:
             raise ValueError(f'"{key}" is not a valid key')
 
-        notes_idx = NOTES.index(Note(key))
+        notes_idx = NOTES.index(key)
         intervals_idx = 0
 
         key_notes = []
