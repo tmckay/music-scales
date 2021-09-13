@@ -5,7 +5,6 @@ from enum import Enum
 from .note import Note
 
 
-#NOTES = 'c c♯/d♭ d d♯/e♭ e f f#/g♭ g g#/a♭ a a#/b♭ b'.split()
 NOTES = [
     Note('c'),
     Note('c♯/d♭'),
