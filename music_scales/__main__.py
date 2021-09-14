@@ -20,7 +20,7 @@ def run():
         (2, 10, Note('c'))
     ]
     print(frets_for_scale)
-    print(fret_board.find_scale(SCALES[0].in_key('c'), starting_string=2))
+    print(fret_board.find_scale(SCALES[0].in_key('c'), starting_string=3))
 
 
 if __name__ == '__main__':
