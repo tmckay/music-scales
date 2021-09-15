@@ -60,12 +60,27 @@ class Fretboard:
             queue.append((starting_string, note))
             while len(queue) > 0:
                 target = queue.popleft()
-                result = self.find_fret_for_note(self.tuning[target[0]], target[1])
+                result = self.find_fret_for_note(
+                    self.tuning[target[0]],
+                    target[1]
+                )
 
-                if len(frets) > 0 and \
-                    (not self.are_frets_in_limit(result, frets[-1][1], fret_reach_limit) or\
-                    abs(target[0] - frets[-1][0]) > 1):
+                # Accept first note that matches
+                if len(frets) == 0:
+                    frets.append((target[0], result, target[1]))
+                # For non-first notes, check that frets are
+                # not too far apart
+                elif not self.are_frets_in_limit(
+                    result,
+                    frets[-1][1],
+                    fret_reach_limit
+                ):
                     queue.append((target[0] + 1, target[1]))
+
+                # Make sure the strings are adjacent
+                elif abs(target[0] - frets[-1][0]) > 1:
+                    queue.append((target[0] + 1, target[1]))
+                # If everything is good, add the fret
                 else:
                     frets.append((target[0], result, target[1]))
 
