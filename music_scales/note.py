@@ -22,4 +22,4 @@ class Note:
         return self.note
 
     def __repr__(self):
-        return f'Note({self.note})'
+        return f'Note(\'{self.note}\')'
