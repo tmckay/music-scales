@@ -1,5 +1,6 @@
 """Runs example code for music_scales package"""
 
+from .concrete_scale import ConcreteScale
 from .fretboard import Fretboard
 from .note import Note
 from . import SCALES
@@ -21,6 +22,10 @@ def run():
     ]
     print(frets_for_scale)
     print(fret_board.find_scale(SCALES[0].in_key('c'), starting_string=3))
+    concrete_scale = ConcreteScale(
+        SCALES[0].in_key('c')
+    )
+    concrete_scale.as_image()
 
 
 if __name__ == '__main__':
