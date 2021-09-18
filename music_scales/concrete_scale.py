@@ -24,6 +24,8 @@ class ConcreteScale:
         with cairo.SVGSurface("concrete_scale.svg", width, height) as surface:
             context = cairo.Context(surface)
             context.scale(width, height)
+            context.set_source_rgb(0.2, 0.2, 1.0)
+            context.set_line_width(0.04)
             context.move_to(0, 0.1)
             context.line_to(1, 0.1)
             surface.write_to_png('/images/example.png')
