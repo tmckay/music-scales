@@ -24,7 +24,7 @@ def run():
     print(fret_board.find_scale(SCALES[0].in_key('c'), starting_string=3))
     concrete_scale = ConcreteScale(
         SCALES[0].name,
-        SCALES[0].in_key('c')
+        fret_board.find_scale(SCALES[0].in_key('c'))
     )
     concrete_scale.as_image()
 

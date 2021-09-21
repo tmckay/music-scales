@@ -24,6 +24,20 @@ class ConcreteScale:
     def as_image(self, width=800, height=800):
         """Return image of scale on a fretboard"""
         print('creating a fretboard image')
+
+        def add_note_to_fretboard(string: int, fret: int, first_fret: int):
+            note_gap = 1 / 6.0
+            string_depth = abs(string - 5)
+            context.arc(
+                note_gap + (note_gap * (fret - first_fret)),
+                string_gap / 2 + string_gap * string_depth,
+                0.05,
+                0.0,
+                2.0 * M_PI
+            )
+            context.fill()
+            context.stroke()
+
         with cairo.SVGSurface("concrete_scale.svg", width, height) as surface:
             context = cairo.Context(surface)
             context.scale(width, height)
@@ -44,10 +58,9 @@ class ConcreteScale:
             context.stroke()
 
             # show dots on strings for scale
-            note_gap = 1 / 8.0
-            context.arc(note_gap, string_gap / 2, 0.05, 0.0, 2.0 * M_PI)
-            context.fill()
-            context.stroke()
+            first_fret = self.scale_def[0][1]
+            for note in self.scale_def:
+                add_note_to_fretboard(note[0], note[1], first_fret)
 
             # save image
             surface.write_to_png(f'/images/{self.name}.png')
