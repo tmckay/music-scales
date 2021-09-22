@@ -29,7 +29,7 @@ class ConcreteScale:
             note_gap = 1 / 6.0
             string_depth = abs(string - 5)
             context.arc(
-                note_gap + (note_gap * (fret - first_fret)),
+                note_gap * 2 + (note_gap * (fret - first_fret)),
                 string_gap / 2 + string_gap * string_depth,
                 0.05,
                 0.0,
@@ -55,6 +55,14 @@ class ConcreteScale:
                 y_value = string_gap * line_idx + string_gap / 2
                 context.move_to(0, y_value)
                 context.line_to(1, y_value)
+            context.stroke()
+
+            # draw guitar frets
+            fret_gap = 1 / 6.0
+            for fret_idx in range(6):
+                x_value = fret_gap * fret_idx + fret_gap / 2
+                context.move_to(x_value, fret_gap / 2)
+                context.line_to(x_value, 1 - fret_gap / 2)
             context.stroke()
 
             # show dots on strings for scale
