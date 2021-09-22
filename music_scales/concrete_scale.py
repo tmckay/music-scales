@@ -23,7 +23,6 @@ class ConcreteScale:
 
     def as_image(self, width=800, height=800):
         """Return image of scale on a fretboard"""
-        print('creating a fretboard image')
 
         def add_note_to_fretboard(string: int, fret: int, first_fret: int):
             note_gap = 1 / 6.0
