@@ -5,6 +5,7 @@ from typing import List, Tuple
 import cairo
 
 from .note import Note
+from .utils import to_ordinal
 
 
 class ConcreteScale:
@@ -80,6 +81,13 @@ class ConcreteScale:
             # show dots on strings for scale
             first_fret = self.scale_def[0][1]
             for idx, note in enumerate(self.scale_def):
+                # label fret
+                if idx == 0:
+                    context.select_font_face('Sans')
+                    context.set_font_size(0.05)
+                    context.move_to(1 / 6.0 * 1.75, 0.06)
+                    ordinal = to_ordinal(note[1])
+                    context.show_text(f'{ordinal} fret')
                 add_note_to_fretboard(note[0], note[1], first_fret, idx in (0, len(self.scale_def)-1))
 
             # save image
