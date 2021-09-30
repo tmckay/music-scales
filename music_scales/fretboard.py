@@ -4,6 +4,7 @@ from collections import deque
 from typing import Deque, List, Tuple
 
 from .constants import NOTES, Tuning
+from .exceptions import UnresolvableScale
 from .note import Note
 
 
@@ -60,6 +61,10 @@ class Fretboard:
             queue.append((starting_string, note))
             while len(queue) > 0:
                 target = queue.popleft()
+
+                if target[0] >= len(self.tuning):
+                    raise UnresolvableScale()
+
                 result = self.find_fret_for_note(
                     self.tuning[target[0]],
                     target[1]
