@@ -1,12 +1,22 @@
 """Runs example code for music_scales package"""
 
+import argparse
+
 from .concrete_scale import ConcreteScale
+from .constants import NOTES
 from .fretboard import Fretboard
 from .note import Note
 from . import SCALES
 
 
-def run():
+def get_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--demo', default=False, action='store_true')
+    parser.add_argument('--web', default=False, action='store_true')
+    return parser.parse_args()
+
+
+def run_demo():
     """Runs example code for package"""
     fret_board = Fretboard()
     print(SCALES[0].name)
@@ -22,7 +32,7 @@ def run():
     ]
     print(frets_for_scale)
     print(fret_board.find_scale(SCALES[0].in_key('c'), starting_string=3))
-    for idx in range(len(SCALES)): 
+    for idx in range(len(SCALES)):
         concrete_scale = ConcreteScale(
             SCALES[idx].name,
             fret_board.find_scale(SCALES[idx].in_key('c'))
@@ -30,5 +40,26 @@ def run():
         concrete_scale.as_image()
 
 
+def run_web():
+    fret_board = Fretboard()
+
+    for scale in SCALES:
+        for note in NOTES:
+            concrete_scale = ConcreteScale(
+                scale.name,
+                fret_board.find_scale(scale.in_key(note))
+            )
+            concrete_scale.as_image()
+
+
+def main():
+    args = get_args()
+
+    if args.demo:
+        run_demo()
+    if args.web:
+        run_web()
+
+
 if __name__ == '__main__':
-    run()
+    main()
