@@ -10,6 +10,7 @@ from . import SCALES
 
 
 def get_args() -> argparse.Namespace:
+    """Get arguments from command line"""
     parser = argparse.ArgumentParser()
     parser.add_argument('--demo', default=False, action='store_true')
     parser.add_argument('--web', default=False, action='store_true')
@@ -32,27 +33,32 @@ def run_demo():
     ]
     print(frets_for_scale)
     print(fret_board.find_scale(SCALES[0].in_key('c'), starting_string=3))
-    for idx in range(len(SCALES)):
+    for idx, _ in enumerate(SCALES):
         concrete_scale = ConcreteScale(
             SCALES[idx].name,
+            Note('c'),
             fret_board.find_scale(SCALES[idx].in_key('c'))
         )
         concrete_scale.as_image()
 
 
 def run_web():
+    """Run code to generate web site"""
     fret_board = Fretboard()
 
     for scale in SCALES:
         for note in NOTES:
+            print(f'Generating image for {scale.name} in key of {note}')
             concrete_scale = ConcreteScale(
                 scale.name,
+                note,
                 fret_board.find_scale(scale.in_key(note))
             )
             concrete_scale.as_image()
 
 
 def main():
+    """Main entrypoint"""
     args = get_args()
 
     if args.demo:

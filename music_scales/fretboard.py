@@ -20,7 +20,10 @@ class Fretboard:
         self.number_frets = number_frets
 
     @staticmethod
-    def find_fret_for_note(open_note: Note, target_note: Note) -> int:
+    def find_fret_for_note(
+        open_note: Note,
+        target_note: Note,
+        start_from_fret: int = 0) -> int:
         """Look for a note and return the fret number for it
 
         open_note: the note of the string on the guitar at fret 0 aka open
@@ -32,8 +35,13 @@ class Fretboard:
             if open_note == note:
                 note_idx = idx
 
-        # Find fret of note on string
         fret = 0
+        while fret < start_from_fret:
+            fret += 1
+            note_idx += 1
+            note_idx = note_idx % len(NOTES)
+
+        # Find fret of note on string
         while True:
             if target_note == NOTES[note_idx]:
                 break
@@ -65,9 +73,19 @@ class Fretboard:
                 if target[0] >= len(self.tuning):
                     raise UnresolvableScale()
 
+                starting_fret = 0
+                if len(frets) > 0:
+                    # start from last fret
+                    starting_fret = frets[0][1]
+                    # give a little extra space
+                    starting_fret -= 2
+                    # unless it's less than 0
+                    starting_fret = max(starting_fret, 0)
+
                 result = self.find_fret_for_note(
                     self.tuning[target[0]],
-                    target[1]
+                    target[1],
+                    starting_fret
                 )
 
                 # Accept first note that matches
@@ -77,7 +95,7 @@ class Fretboard:
                 # not too far apart
                 elif not self.are_frets_in_limit(
                     result,
-                    frets[-1][1],
+                    frets[0][1],
                     fret_reach_limit
                 ):
                     queue.append((target[0] + 1, target[1]))
@@ -88,5 +106,6 @@ class Fretboard:
                 # If everything is good, add the fret
                 else:
                     frets.append((target[0], result, target[1]))
+                    starting_string = target[0]
 
         return frets

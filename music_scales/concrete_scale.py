@@ -12,7 +12,7 @@ class ConcreteScale:
     """A representation of a scale on a fretboard with
     actual string and frets"""
 
-    def __init__(self, name: str, scale_def: List[Tuple[int, int, Note]]):
+    def __init__(self, name: str, key: str, scale_def: List[Tuple[int, int, Note]]):
         """
         Args:
             name: name of the scale
@@ -20,7 +20,13 @@ class ConcreteScale:
                        List[Tuple[<guitar-string>, <fret>, Note]]
         """
         self.name = name
+        self.key = key
         self.scale_def = scale_def
+
+    @property
+    def path_safe_key(self):
+        """Returns a key that is path safe for saving images"""
+        return str(self.key).split('/')[0]
 
     def as_image(self, width=800, height=800):
         """Return image of scale on a fretboard"""
@@ -88,7 +94,12 @@ class ConcreteScale:
                     context.move_to(1 / 6.0 * 1.75, 0.06)
                     ordinal = to_ordinal(note[1])
                     context.show_text(f'{ordinal} fret')
-                add_note_to_fretboard(note[0], note[1], first_fret, idx in (0, len(self.scale_def)-1))
+                add_note_to_fretboard(
+                    note[0],
+                    note[1],
+                    first_fret,
+                    idx in (0, len(self.scale_def)-1)
+                )
 
             # save image
-            surface.write_to_png(f'/images/{self.name}.png')
+            surface.write_to_png(f'/images/{self.name}_{self.path_safe_key}.png')

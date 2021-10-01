@@ -1,4 +1,7 @@
+"""Misc utility functions"""
+
 def to_ordinal(number: int):
+    """Convert a number to an ordinal version of it"""
     ordinals = {
         11: '11th',
         12: '12th',
@@ -9,9 +12,8 @@ def to_ordinal(number: int):
     number_as_str = str(number)
     if number_as_str[-1] in ('1',):
         return f'{number_as_str}st'
-    elif number_as_str[-1] in ('2',):
+    if number_as_str[-1] in ('2',):
         return f'{number_as_str}nd'
-    elif number_as_str[-1] in ('3',):
+    if number_as_str[-1] in ('3',):
         return f'{number_as_str}rd'
-    else:
-        return f'{number_as_str}th'
+    return f'{number_as_str}th'

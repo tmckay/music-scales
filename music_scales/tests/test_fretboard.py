@@ -9,6 +9,32 @@ def test_find_fret_for_note():
     assert fretboard.find_fret_for_note(Note('e'), Note('a')) == 5
 
 
+def test_find_fret_for_note_with_start_from():
+    fretboard = Fretboard()
+
+    assert fretboard.find_fret_for_note(
+        Note('e'),
+        Note('e'),
+        start_from_fret=9
+    ) == 12
+
+    assert fretboard.find_fret_for_note(
+        Note('e'),
+        Note('e'),
+    ) == 0
+
+    assert fretboard.find_fret_for_note(
+        Note('e'),
+        Note('a'),
+    ) == 5
+
+    assert fretboard.find_fret_for_note(
+        Note('e'),
+        Note('f'),
+        start_from_fret=12
+    ) == 13
+
+
 def test_find_scale():
     fretboard = Fretboard()
 
