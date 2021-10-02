@@ -61,17 +61,17 @@ class Fretboard:
         self,
         scale: List[str],
         starting_string: int = 0,
-        fret_reach_limit: int = 3) -> List[Tuple]:
+        fret_reach_limit: int = 4) -> List[Tuple]:
         """starting_string is index of string in tuning"""
         frets: List[Tuple] = []
         queue: Deque[Tuple] = deque()
-        for note in scale:
+        for idx, note in enumerate(scale):
             queue.append((starting_string, note))
             while len(queue) > 0:
                 target = queue.popleft()
 
                 if target[0] >= len(self.tuning):
-                    raise UnresolvableScale()
+                    raise UnresolvableScale(f'Could not find note {note} / {idx}')
 
                 starting_fret = 0
                 if len(frets) > 0:
