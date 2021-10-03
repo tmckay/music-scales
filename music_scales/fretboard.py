@@ -57,12 +57,15 @@ class Fretboard:
         """Return if two frets are within a certain distance"""
         return abs(fret_b - fret_a) <= limit
 
-    def find_scale(
-        self,
-        scale: List[str],
-        starting_string: int = 0,
-        fret_reach_limit: int = 4) -> List[Tuple]:
-        """starting_string is index of string in tuning"""
+    def find_scale(self, scale: List[str], starting_string: int = 0,
+                   fret_reach_limit: int = 4) -> List[Tuple]:
+        """
+        Args:
+            scale: scale to generate frets for
+            starting_string: index of string in tuning
+            fret_reach_limit: number of frets between two notes
+        """
+
         frets: List[Tuple] = []
         queue: Deque[Tuple] = deque()
         for idx, note in enumerate(scale):
