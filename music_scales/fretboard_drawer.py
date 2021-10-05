@@ -55,7 +55,8 @@ class FretboardDrawer:
         self.context = context
         self.surface = surface
 
-    def add_note(self, string: int, fret: int, first_fret: int, root: bool = False):
+    def add_note(self, string: int, fret: int,
+                 first_fret: int, root: bool = False):
         """
         Args:
             string: string number to draw note on
@@ -63,11 +64,28 @@ class FretboardDrawer:
             first fret: first fret of scale
             root: whether it's a root note of scale
         """
+        # calculate the left to right spacing
         note_gap = 1 / self.num_frets
-        string_depth = abs(string - self.num_strings + 1)
+
+
+        # determine the x coordinate of dot
+        # note_gap * 2 <-- starts us two frets in
+        # (note_gap * (fret - first_fret)) <-- difference between first
+        #                                      fret and this fret
         x_coord = note_gap * 2 + (note_gap * (fret - first_fret))
+
+        # calculate the gap between strings
         string_gap = 1 / self.num_strings
+
+        # calculate the top to bottom spacing
+        string_depth = abs(string - self.num_strings + 1)
+
+        # determine y coordinate
+        # string_gap / 2 <-- we start a half a string gap from the top
+        # string_gap * string_depth <-- how far down is our string
         y_coord = string_gap / 2 + string_gap * string_depth
+
+        # draw solid circle on string and in the middle of fret
         self.context.arc(
             x_coord,
             y_coord,
@@ -98,6 +116,3 @@ class FretboardDrawer:
     def save(self, path):
         # save image
         self.surface.write_to_png(path)
-
-
-
