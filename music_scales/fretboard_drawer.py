@@ -72,7 +72,7 @@ class FretboardDrawer:
         # note_gap * 2 <-- starts us two frets in
         # (note_gap * (fret - first_fret)) <-- difference between first
         #                                      fret and this fret
-        x_coord = note_gap * 2 + (note_gap * (fret - first_fret))
+        x_coord = note_gap + (note_gap * (fret - first_fret))
 
         # calculate the gap between strings
         string_gap = 1 / self.num_strings
