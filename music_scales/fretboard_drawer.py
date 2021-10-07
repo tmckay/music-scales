@@ -36,10 +36,10 @@ class FretboardDrawer:
 
         # draw guitar strings
         context.set_source_rgb(*self.fgcolor)
-        context.set_line_width(0.02)
-        string_gap = 1 / self.num_strings
+        context.set_line_width(0.01)
+        string_gap = (1 - .2) / self.num_strings
         for line_idx in range(self.num_strings):
-            y_value = string_gap * line_idx + string_gap / 2
+            y_value = string_gap * line_idx + string_gap / 2 + .1
             context.move_to(0, y_value)
             context.line_to(1, y_value)
         context.stroke()
@@ -48,8 +48,8 @@ class FretboardDrawer:
         fret_gap = 1 / self.num_frets
         for fret_idx in range(self.num_frets):
             x_value = fret_gap * fret_idx + fret_gap / 2
-            context.move_to(x_value, fret_gap / 2)
-            context.line_to(x_value, 1 - fret_gap / 2)
+            context.move_to(x_value, string_gap / 2 + .1)
+            context.line_to(x_value, 1 - string_gap / 2 - .1)
         context.stroke()
 
         self.context = context
@@ -75,7 +75,7 @@ class FretboardDrawer:
         x_coord = note_gap + (note_gap * (fret - first_fret))
 
         # calculate the gap between strings
-        string_gap = 1 / self.num_strings
+        string_gap = (1 - .2) / self.num_strings
 
         # calculate the top to bottom spacing
         string_depth = abs(string - self.num_strings + 1)
@@ -83,7 +83,7 @@ class FretboardDrawer:
         # determine y coordinate
         # string_gap / 2 <-- we start a half a string gap from the top
         # string_gap * string_depth <-- how far down is our string
-        y_coord = string_gap / 2 + string_gap * string_depth
+        y_coord = string_gap / 2 + .1 + string_gap * string_depth
 
         # draw solid circle on string and in the middle of fret
         self.context.arc(
