@@ -3,6 +3,7 @@ from math import pi as M_PI
 
 import cairo
 
+
 class FretboardDrawer:
     """Draws a base fretboard image on which notes can be added"""
 
@@ -108,9 +109,9 @@ class FretboardDrawer:
         self.context.stroke()
 
     def add_label(self, text):
-        self.context.select_font_face('Sans')
-        self.context.set_font_size(0.05)
-        self.context.move_to(1 / self.num_frets * 1.75, 0.06)
+        self.context.select_font_face('Sans', cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
+        self.context.set_font_size(0.08)
+        self.context.move_to(1 / self.num_frets - .05, 0.12)
         self.context.show_text(text)
 
     def save(self, path):
