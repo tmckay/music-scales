@@ -1,6 +1,6 @@
 """Guitar fretboard object"""
 
-from collections import deque
+from collections import deque, namedtuple
 from typing import Deque, List, Tuple
 
 from .constants import NOTES, Tuning
@@ -66,49 +66,63 @@ class Fretboard:
             fret_reach_limit: number of frets between two notes
         """
 
-        frets: List[Tuple] = []
-        queue: Deque[Tuple] = deque()
+        NoteSearch = namedtuple('NoteSearch', [
+                'string',
+                'note'
+            ]
+        )
+        NoteFound = namedtuple('NoteFound', [
+                'string',
+                'fret',
+                'note'
+            ]
+        )
+        frets: List[Tuple[NoteFound]] = []
+        queue: Deque[Tuple[NoteSearch]] = deque()
+
         for idx, note in enumerate(scale):
-            queue.append((starting_string, note))
+
+            queue.append(NoteSearch(starting_string, note))
+
             while len(queue) > 0:
                 target = queue.popleft()
 
-                if target[0] >= len(self.tuning):
+                if target.string >= len(self.tuning):
                     raise UnresolvableScale(f'Could not find note {note} / {idx}')
 
                 starting_fret = 0
                 if len(frets) > 0:
                     # start from last fret
-                    starting_fret = frets[0][1]
+                    starting_fret = frets[0].fret
                     # give a little extra space
                     starting_fret -= 2
                     # unless it's less than 0
                     starting_fret = max(starting_fret, 0)
 
                 result = self.find_fret_for_note(
-                    self.tuning[target[0]],
-                    target[1],
+                    self.tuning[target.string],
+                    target.note,
                     starting_fret
                 )
 
                 # Accept first note that matches
                 if len(frets) == 0:
-                    frets.append((target[0], result, target[1]))
+                    frets.append(NoteFound(target.string, result, target.note))
                 # For non-first notes, check that frets are
                 # not too far apart
                 elif not self.are_frets_in_limit(
                     result,
-                    frets[0][1],
+                    frets[0].fret,
                     fret_reach_limit
                 ):
-                    queue.append((target[0] + 1, target[1]))
+                    queue.append(NoteSearch(target.string + 1, target.note))
 
                 # Make sure the strings are adjacent
-                elif abs(target[0] - frets[-1][0]) > 1:
-                    queue.append((target[0] + 1, target[1]))
+                elif abs(target.string - frets[-1].string) > 1:
+                    queue.append(NoteSearch(target.string + 1, target.fret))
                 # If everything is good, add the fret
                 else:
-                    frets.append((target[0], result, target[1]))
-                    starting_string = target[0]
+                    frets.append(NoteFound(target.string, result, target.note))
+                    starting_string = target.string
 
         return frets
