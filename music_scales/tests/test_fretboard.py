@@ -35,6 +35,12 @@ def test_find_fret_for_note_with_start_from():
     ) == 13
 
 
+def test_build_note_cache():
+    fretboard = Fretboard()
+    fretboard._build_note_cache()
+    assert sum([len(val) for val in fretboard._note_cache.values()]) == 6 * 25
+
+
 def test_find_scale():
     fretboard = Fretboard()
 

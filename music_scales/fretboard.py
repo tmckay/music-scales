@@ -1,6 +1,6 @@
 """Guitar fretboard object"""
 
-from collections import deque, namedtuple
+from collections import defaultdict, deque, namedtuple
 from typing import Deque, List, Tuple
 
 from .constants import NOTES, Tuning
@@ -57,6 +57,29 @@ class Fretboard:
         """Return if two frets are within a certain distance"""
         return abs(fret_b - fret_a) <= limit
 
+    def _build_note_cache(self):
+        """Builds cache of all notes on fretboard"""
+        note_cache = defaultdict(list)
+
+        for string, open_note in enumerate(self.tuning):
+
+            # Find open note within notes sequence
+            for idx, note in enumerate(NOTES):
+                if open_note == note:
+                    note_idx = idx
+
+            fret = 0
+            while fret <= self.number_frets:
+                current_note = NOTES[note_idx]
+
+                note_cache[str(current_note)].append((string, fret))
+
+                fret += 1
+                note_idx += 1
+                note_idx = note_idx % len(NOTES)
+
+        self._note_cache = note_cache
+
     def find_scale(self, scale: List[str], starting_string: int = 0,
                    fret_reach_limit: int = 4) -> List[Tuple]:
         """
@@ -87,17 +110,16 @@ class Fretboard:
             while len(queue) > 0:
                 target = queue.popleft()
 
+                # we've iterated through all the strings and
+                # haven't found a note that meets all criteria
                 if target.string >= len(self.tuning):
                     raise UnresolvableScale(f'Could not find note {note} / {idx}')
 
-                starting_fret = 0
-                if len(frets) > 0:
-                    # start from last fret
-                    starting_fret = frets[0].fret
-                    # give a little extra space
-                    starting_fret -= 2
-                    # unless it's less than 0
-                    starting_fret = max(starting_fret, 0)
+                starting_fret = 0  # start searching from the open string
+                if len(frets) > 0:  # check if this is the first note we're finding
+                    starting_fret = frets[0].fret  # start searching from fret of first note of scale
+                    starting_fret -= 3  # search two notes up from last fret
+                    starting_fret = max(starting_fret, 0)  # unless it's 0 or an open string
 
                 result = self.find_fret_for_note(
                     self.tuning[target.string],
