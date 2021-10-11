@@ -109,11 +109,13 @@ class FretboardDrawer:
         self.context.stroke()
 
     def add_label(self, text):
+        """Add fret label to the top of the fretboard image"""
         self.context.select_font_face('Sans', cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
         self.context.set_font_size(0.08)
         self.context.move_to(1 / self.num_frets - .05, 0.12)
         self.context.show_text(text)
 
     def save(self, path):
+        """Save SVG as PNG to local file path"""
         # save image
         self.surface.write_to_png(path)

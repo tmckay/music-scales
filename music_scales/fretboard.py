@@ -1,7 +1,7 @@
 """Guitar fretboard object"""
 
 from collections import defaultdict, deque, namedtuple
-from typing import Deque, List, Tuple
+from typing import Deque, Dict, List, Tuple
 
 from .constants import NOTES, Tuning
 from .exceptions import UnresolvableScale
@@ -18,6 +18,7 @@ class Fretboard:
         ):
         self.tuning = tuning
         self.number_frets = number_frets
+        self._note_cache: Dict = {}
 
     @staticmethod
     def find_fret_for_note(
@@ -81,7 +82,7 @@ class Fretboard:
         self._note_cache = note_cache
 
     def find_scale(self, scale: List[str], starting_string: int = 0,
-                   fret_reach_limit: int = 4) -> List[Tuple]:
+                   fret_reach_limit: int = 4) -> List:
         """
         Args:
             scale: scale to generate frets for
@@ -100,8 +101,8 @@ class Fretboard:
                 'note'
             ]
         )
-        frets: List[Tuple[NoteFound]] = []
-        queue: Deque[Tuple[NoteSearch]] = deque()
+        frets: List[NoteFound] = []
+        queue: Deque[NoteSearch] = deque()
 
         for idx, note in enumerate(scale):
 
@@ -117,7 +118,8 @@ class Fretboard:
 
                 starting_fret = 0  # start searching from the open string
                 if len(frets) > 0:  # check if this is the first note we're finding
-                    starting_fret = frets[0].fret  # start searching from fret of first note of scale
+                    starting_fret = frets[0].fret  # start searching from
+                                                   # fret of first note of scale
                     starting_fret -= 3  # search two notes up from last fret
                     starting_fret = max(starting_fret, 0)  # unless it's 0 or an open string
 
@@ -141,7 +143,7 @@ class Fretboard:
 
                 # Make sure the strings are adjacent
                 elif abs(target.string - frets[-1].string) > 1:
-                    queue.append(NoteSearch(target.string + 1, target.fret))
+                    queue.append(NoteSearch(target.string + 1, target.note))
                 # If everything is good, add the fret
                 else:
                     frets.append(NoteFound(target.string, result, target.note))

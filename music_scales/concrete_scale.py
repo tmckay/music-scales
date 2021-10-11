@@ -1,5 +1,4 @@
 """Concrete scale on a fretboard"""
-from math import pi as M_PI
 from typing import List, Tuple
 
 from .fretboard_drawer import FretboardDrawer
@@ -39,7 +38,7 @@ class ConcreteScale:
             if idx == 0:
                 ordinal = to_ordinal(note[1])
                 fretboard_drawer.add_label(f'{ordinal} fret')
-                
+
             fretboard_drawer.add_note(
                 note[0],
                 note[1],
