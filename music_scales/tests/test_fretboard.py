@@ -40,6 +40,10 @@ def test_build_note_cache():
     fretboard._build_note_cache()
     assert sum([len(val) for val in fretboard._note_cache.values()]) == 6 * 25
 
+    assert len(fretboard._note_cache['c']) == 12
+    assert len(fretboard._note_cache['d♯/e♭']) == 12
+    assert (1, 3) in fretboard._note_cache['c']
+
 
 def test_find_scale():
     fretboard = Fretboard()
