@@ -43,6 +43,13 @@ def test_build_note_cache():
     assert len(fretboard._note_cache['c']) == 12
     assert len(fretboard._note_cache['d♯/e♭']) == 12
     assert (1, 3) in fretboard._note_cache['c']
+    assert (0, 8) in fretboard._note_cache['c']
+    assert (4, 1) in fretboard._note_cache['c']
+    assert (4, 13) in fretboard._note_cache['c']
+    assert (1, 15) in fretboard._note_cache['c']
+    assert (2, 10) in fretboard._note_cache['c']
+    assert (2, 11) not in fretboard._note_cache['c']
+    assert (0, 11) in fretboard._note_cache['d♯/e♭']
 
 
 def test_find_scale():
