@@ -52,6 +52,17 @@ def test_build_note_cache():
     assert (0, 11) in fretboard._note_cache['d♯/e♭']
 
 
+def test_find_scale_hashmap_version():
+    fretboard = Fretboard()
+    fretboard._build_note_cache()
+    
+    assert len(fretboard.find_scale(
+        scale=SCALES[0].in_key('c'),
+        starting_string=0,
+        fret_reach_limit=4
+    )) == 7 
+
+
 def test_find_scale():
     fretboard = Fretboard()
 

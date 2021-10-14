@@ -81,6 +81,37 @@ class Fretboard:
 
         self._note_cache = note_cache
 
+    def find_scale_hashmap_version(self, scale: List[str], starting_string: int = 0,
+                                   fret_reach_limit: int = 4) -> List:
+        """Hashmap version of finding a scale that uses a precomputed note index"""
+        scale_fingerings = []
+        string = starting_string
+
+        for idx, note in enumerate(scale):
+            candidates = self._note_cache[str(note)]
+
+            while string < len(self.tuning):
+                # only consider notes on the right string
+                on_string = [candidate for candidate in candidates if candidate[0] == string]
+
+                # special case first notes
+                if idx == 0:
+                    # choose lowest allowable fret position on
+                    # the starting_string
+                    lowest_fret = sorted(on_string, key=lambda x: x[1])[0]
+                    scale_fingerings.append(lowest_fret)
+                    continue
+
+                within_reach = [candidate for candidate in candidates
+                                if abs(candidate[1] - scale_fingerings[-1]) <= fret_reach_limit]
+                if len(within_reach) > 0:
+                    # keep the first option that works
+                    scale_fingerings.append(within_reach[0])
+                else:
+                    # increment string and try again
+                    string += 1
+        return scale_fingerings
+
     def find_scale(self, scale: List[str], starting_string: int = 0,
                    fret_reach_limit: int = 4) -> List:
         """
