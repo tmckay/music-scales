@@ -1,4 +1,4 @@
-from music_scales.fretboard import Fretboard
+from music_scales.fretboard import Fretboard, NoteFound
 from music_scales.note import Note
 from music_scales import SCALES
 
@@ -61,6 +61,20 @@ def test_find_scale_hashmap_version():
         starting_string=0,
         fret_reach_limit=4
     )) == 7 
+
+    assert fretboard.find_scale(
+        scale=SCALES[0].in_key('c'),
+        starting_string=0,
+        fret_reach_limit=4
+    ) == [
+        NoteFound(string=0, fret=8, note=Note('c')),
+        NoteFound(string=0, fret=11, note=Note('d♯/e♭')),
+        NoteFound(string=1, fret=8, note=Note('f')),
+        NoteFound(string=1, fret=9, note=Note('f#/g♭')),
+        NoteFound(string=1, fret=10, note=Note('g')),
+        NoteFound(string=2, fret=8, note=Note('a#/b♭')),
+        NoteFound(string=2, fret=10, note=Note('c'))
+    ]
 
 
 def test_find_scale():

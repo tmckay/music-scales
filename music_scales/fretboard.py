@@ -8,6 +8,19 @@ from .exceptions import UnresolvableScale
 from .note import Note
 
 
+NoteSearch = namedtuple('NoteSearch', [
+        'string',
+        'note'
+    ]
+)
+NoteFound = namedtuple('NoteFound', [
+        'string',
+        'fret',
+        'note'
+    ]
+)
+
+
 class Fretboard:
     """Represents a guitar fretboard on a standard 6-string guitar.
     You can pass different tunings, but the default is standard tuning."""
@@ -120,18 +133,6 @@ class Fretboard:
             starting_string: index of string in tuning
             fret_reach_limit: number of frets between two notes
         """
-
-        NoteSearch = namedtuple('NoteSearch', [
-                'string',
-                'note'
-            ]
-        )
-        NoteFound = namedtuple('NoteFound', [
-                'string',
-                'fret',
-                'note'
-            ]
-        )
         frets: List[NoteFound] = []
         queue: Deque[NoteSearch] = deque()
 
