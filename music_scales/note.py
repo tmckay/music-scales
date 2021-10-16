@@ -57,6 +57,9 @@ class Note:
         # assume str
         return other in self.note
 
+    def __hash__(self):
+        return hash(self.note)
+
     def __str__(self):
         return '/'.join(self.note)
 

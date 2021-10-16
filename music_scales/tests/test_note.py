@@ -15,3 +15,7 @@ def test_normalize_note_str():
     assert note._normalize_note_str('cb') == 'c♭'
     assert note._normalize_note_str('c sharp') == 'c♯'
     assert note._normalize_note_str('c flat') == 'c♭'
+
+
+def test_note_hashable():
+    {Note('c'): 'c'}
