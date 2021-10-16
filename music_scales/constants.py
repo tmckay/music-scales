@@ -12,11 +12,11 @@ NOTES = [
     Note('d♯/e♭'),
     Note('e'),
     Note('f'),
-    Note('f#/g♭'),
+    Note('f♯/g♭'),
     Note('g'),
-    Note('g#/a♭'),
+    Note('g♯/a♭'),
     Note('a'),
-    Note('a#/b♭'),
+    Note('a♯/b♭'),
     Note('b')
 ]
 
