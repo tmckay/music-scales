@@ -86,7 +86,7 @@ class Fretboard:
             while fret <= self.number_frets:
                 current_note = NOTES[note_idx]
 
-                note_cache[str(current_note)].append((string, fret))
+                note_cache[current_note].append((string, fret))
 
                 fret += 1
                 note_idx += 1
@@ -101,7 +101,7 @@ class Fretboard:
         string = starting_string
 
         for idx, note in enumerate(scale):
-            candidates = self._note_cache[str(note)]
+            candidates = self._note_cache[note]
 
             while string < len(self.tuning):
                 # only consider notes on the right string

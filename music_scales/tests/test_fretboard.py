@@ -40,16 +40,16 @@ def test_build_note_cache():
     fretboard._build_note_cache()
     assert sum([len(val) for val in fretboard._note_cache.values()]) == 6 * 25
 
-    assert len(fretboard._note_cache['c']) == 12
-    assert len(fretboard._note_cache['d♯/e♭']) == 12
-    assert (1, 3) in fretboard._note_cache['c']
-    assert (0, 8) in fretboard._note_cache['c']
-    assert (4, 1) in fretboard._note_cache['c']
-    assert (4, 13) in fretboard._note_cache['c']
-    assert (1, 15) in fretboard._note_cache['c']
-    assert (2, 10) in fretboard._note_cache['c']
-    assert (2, 11) not in fretboard._note_cache['c']
-    assert (0, 11) in fretboard._note_cache['d♯/e♭']
+    assert len(fretboard._note_cache[Note('c')]) == 12
+    assert len(fretboard._note_cache[Note('d♯/e♭')]) == 12
+    assert (1, 3) in fretboard._note_cache[Note('c')]
+    assert (0, 8) in fretboard._note_cache[Note('c')]
+    assert (4, 1) in fretboard._note_cache[Note('c')]
+    assert (4, 13) in fretboard._note_cache[Note('c')]
+    assert (1, 15) in fretboard._note_cache[Note('c')]
+    assert (2, 10) in fretboard._note_cache[Note('c')]
+    assert (2, 11) not in fretboard._note_cache[Note('c')]
+    assert (0, 11) in fretboard._note_cache[Note('d♯/e♭')]
 
 
 def test_find_scale_hashmap_version():
