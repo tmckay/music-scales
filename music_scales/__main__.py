@@ -45,6 +45,7 @@ def run_demo():
 def run_web():
     """Run code to generate web site"""
     fret_board = Fretboard()
+    #fret_board._build_note_cache()
 
     for scale in SCALES:
         for note in NOTES:
@@ -53,6 +54,7 @@ def run_web():
                 scale.name,
                 note,
                 fret_board.find_scale(scale.in_key(note))
+                #fret_board.find_scale_hashmap_version(scale.in_key(note))
             )
             concrete_scale.as_image()
 

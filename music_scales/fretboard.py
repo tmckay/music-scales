@@ -100,9 +100,8 @@ class Fretboard:
         scale_fingerings = []
         string = starting_string
 
-        for idx, note in enumerate(scale):
-            candidates = self._note_cache[note]
-
+        def _get_scale_fingering(candidates):
+            nonlocal string
             while string < len(self.tuning):
                 # only consider notes on the right string
                 on_string = [candidate for candidate in candidates if candidate[0] == string]
@@ -112,17 +111,22 @@ class Fretboard:
                     # choose lowest allowable fret position on
                     # the starting_string
                     lowest_fret = sorted(on_string, key=lambda x: x[1])[0]
-                    scale_fingerings.append(lowest_fret)
-                    continue
+                    return lowest_fret
 
                 within_reach = [candidate for candidate in candidates
-                                if abs(candidate[1] - scale_fingerings[-1]) <= fret_reach_limit]
+                                if abs(candidate[1] - scale_fingerings[-1][1]) <= fret_reach_limit]
                 if len(within_reach) > 0:
                     # keep the first option that works
-                    scale_fingerings.append(within_reach[0])
+                    return within_reach[0]
                 else:
                     # increment string and try again
                     string += 1
+
+        for idx, note in enumerate(scale):
+            candidates = self._note_cache[note]
+
+            scale_fingerings.append(_get_scale_fingering(candidates))
+
         return scale_fingerings
 
     def find_scale(self, scale: List[str], starting_string: int = 0,
