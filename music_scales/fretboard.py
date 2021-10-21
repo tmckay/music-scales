@@ -100,8 +100,7 @@ class Fretboard:
         scale_fingerings = []
         string = starting_string
 
-        def _get_scale_fingering(candidates):
-            nonlocal string
+        def _get_scale_fingering(candidates, string):
             while string < len(self.tuning):
                 # only consider notes on the right string
                 on_string = [candidate for candidate in candidates if candidate[0] == string]
@@ -125,7 +124,7 @@ class Fretboard:
         for idx, note in enumerate(scale):
             candidates = self._note_cache[note]
 
-            scale_fingerings.append(_get_scale_fingering(candidates))
+            scale_fingerings.append(_get_scale_fingering(candidates, string))
 
         return scale_fingerings
 
