@@ -113,7 +113,10 @@ class Fretboard:
                     return lowest_fret
 
                 within_reach = [candidate for candidate in candidates
-                                if abs(candidate[1] - scale_fingerings[-1][1]) <= fret_reach_limit]
+                                if self.are_frets_in_limit(
+                                    candidate[1],
+                                    scale_fingerings[0][1],
+                                    fret_reach_limit)]
                 if len(within_reach) > 0:
                     # keep the first option that works
                     return within_reach[0]
