@@ -53,8 +53,8 @@ def run_web():
             concrete_scale = ConcreteScale(
                 scale.name,
                 note,
-                fret_board.find_scale(scale.in_key(note))
-                #fret_board.find_scale_hashmap_version(scale.in_key(note))
+                #fret_board.find_scale(scale.in_key(note))
+                fret_board.find_scale_hashmap_version(scale.in_key(note))
             )
             concrete_scale.as_image()
 
