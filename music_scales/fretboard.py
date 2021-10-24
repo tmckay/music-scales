@@ -97,10 +97,10 @@ class Fretboard:
     def find_scale_hashmap_version(self, scale: List[str], starting_string: int = 0,
                                    fret_reach_limit: int = 4) -> List:
         """Hashmap version of finding a scale that uses a precomputed note index"""
-        scale_fingerings = []
+        scale_fingerings: List[Tuple[int, int]] = []
         string = starting_string
 
-        def _get_scale_fingering(candidates):
+        def _get_scale_fingering(idx, candidates):
             nonlocal string
             while string < len(self.tuning):
                 # only consider notes on the specified string
@@ -128,7 +128,7 @@ class Fretboard:
         for idx, note in enumerate(scale):
             candidates = self._note_cache[note]
 
-            scale_fingerings.append(_get_scale_fingering(candidates))
+            scale_fingerings.append(_get_scale_fingering(idx, candidates))
 
         return scale_fingerings
 
