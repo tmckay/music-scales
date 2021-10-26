@@ -1,4 +1,4 @@
-.PHONY: build test run web
+.PHONY: build test run web web2
 
 build:
 		docker build --tag music-scales .
@@ -11,3 +11,6 @@ run: | build
 
 web: | build
 		docker run -v ${PWD}/web-images:/images music-scales /bin/bash -c "python -m music_scales --web"
+
+web2: | build
+		docker run -v ${PWD}/web-images:/images music-scales /bin/bash -c "python web/generate_site.py"

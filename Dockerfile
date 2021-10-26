@@ -10,4 +10,5 @@ RUN pip3 install --requirement requirements.txt
 COPY setup.py ./
 COPY mypy.ini ./
 COPY music_scales music_scales/
+COPY web web/
 RUN pip3 install .
