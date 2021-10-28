@@ -63,3 +63,10 @@ class Scale:
             notes_idx = notes_idx % len(NOTES)
 
         return key_notes
+
+    def __repr__(self):
+        intervals = ' '.join(self.intervals)
+        first_segment = f"Scale('{self.name}', '{intervals}'"
+        if self.mode:
+            first_segment = first_segment + f", '{self.mode}'"
+        return first_segment + ')'
