@@ -16,3 +16,11 @@ def test_scale_in_key():
         Note('f#'),
         Note('g')
     ]
+
+
+def test_scale_with_degrees():
+    scale = Scale('foo', 'w w')
+    assert scale.with_degrees(Note('c')) == [
+        (Note('c'), 'unison'),
+        (Note('d'), 'major second'),
+    ]
