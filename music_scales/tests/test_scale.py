@@ -14,7 +14,8 @@ def test_scale_in_key():
         Note('d'),
         Note('e'),
         Note('f#'),
-        Note('g')
+        Note('g'),
+        Note('a#')
     ]
 
 
@@ -23,4 +24,5 @@ def test_scale_with_degrees():
     assert scale.with_degrees(Note('c')) == [
         (Note('c'), 'unison'),
         (Note('d'), 'major second'),
+        (Note('e'), 'major third')
     ]

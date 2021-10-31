@@ -49,9 +49,10 @@ class Scale:
         intervals_idx = 0
 
         key_notes = []
+        # Add first note / key of scale
+        key_notes.append((NOTES[notes_idx], DEGREES[intervals_idx]))
 
         for step in self.intervals:
-            key_notes.append((NOTES[notes_idx], DEGREES[intervals_idx]))
 
             if step not in self.interval_to_steps:
                 raise ValueError(f'Incorrect value "{step}" for scale interval')
@@ -61,6 +62,8 @@ class Scale:
             intervals_idx += next_step
 
             notes_idx = notes_idx % len(NOTES)
+
+            key_notes.append((NOTES[notes_idx], DEGREES[intervals_idx]))
 
         return key_notes
 
