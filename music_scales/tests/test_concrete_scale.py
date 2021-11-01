@@ -1,6 +1,7 @@
 from music_scales.concrete_scale import ConcreteScale
 from music_scales.note import Note
 
+
 def test_concrete_scale():
     """Fails if we can't instantiate a ConcreteScale"""
     concrete_scale = ConcreteScale(
