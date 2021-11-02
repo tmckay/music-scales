@@ -22,6 +22,8 @@ class Note:
     ]
 
     def __init__(self, note: str):
+        note = note.lower()
+
         if '/' in note:
             note = note.split('/')[0]
 

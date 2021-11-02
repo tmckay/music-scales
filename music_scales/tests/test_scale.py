@@ -25,6 +25,15 @@ def test_scale_with_degrees():
         (Note('a'), 'major sixth'),
     ]
 
+    assert scale.with_degrees(Note('d#')) == [
+        (Note('d#'), 'unison'),
+        (Note('f'), 'major second'),
+        (Note('g'), 'major third'),
+        (Note('g#'), 'perfect fourth'),
+        (Note('a'), 'diminished fifth'),
+        (Note('c'), 'major sixth'),
+    ]
+
 
 def test_scale_repr():
     scale = Scale('foo_name', 'w w w+h', 'bar_mode')

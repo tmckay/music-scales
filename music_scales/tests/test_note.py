@@ -7,6 +7,9 @@ def test_note_equality():
     assert Note('c') == 'c'
     assert not Note('c') == Note('c♯/d♭')
     assert 'c♯' == Note('c♯')
+    assert Note('C') == Note('c')
+    assert Note('F#') == Note('f#')
+    assert Note('E FLAT') == Note('Eb')
 
 
 def test_normalize_note_str():
