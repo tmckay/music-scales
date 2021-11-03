@@ -21,14 +21,6 @@ NOTES = [
 ]
 
 
-DEGREES = (
-    'unison', 'minor second', 'major second', 'minor third',
-    'major third', 'perfect fourth', 'diminished fifth',
-    'perfect fifth', 'minor sixth', 'major sixth', 'minor seventh',
-    'major seventh', 'octave'
-)
-
-
 class Tuning:
     """Guitar tunings"""
     STANDARD = ('e', 'a', 'd', 'g', 'b', 'e')
@@ -49,3 +41,11 @@ class Degree(Enum):
     MINOR_SEVENTH = 'minor seventh'
     MAJOR_SEVENTH = 'major seventh'
     OCTAVE = 'octave'
+
+
+DEGREES = (
+    Degree.UNISON, Degree.MINOR_SECOND, Degree.MAJOR_SECOND,
+    Degree.MINOR_THIRD, Degree.MAJOR_THIRD, Degree.PERFECT_FOURTH,
+    Degree.DIMINISHED_FIFTH, Degree.PERFECT_FIFTH, Degree.MINOR_SIXTH,
+    Degree.MAJOR_SIXTH, Degree.MINOR_SEVENTH, Degree.MAJOR_SEVENTH, Degree.OCTAVE
+)

@@ -2,7 +2,7 @@
 
 from typing import List, Tuple
 
-from .constants import DEGREES, NOTES
+from .constants import Degree, DEGREES, NOTES
 from .note import Note
 
 
@@ -36,7 +36,7 @@ class Scale:
         """
         return [step[0] for step in self.with_degrees(key)]
 
-    def with_degrees(self, key: Note) -> List[Tuple[Note, str]]:
+    def with_degrees(self, key: Note) -> List[Tuple[Note, Degree]]:
         """Generate notes of scale and include degrees e.g. 'major third'
 
         Args:
