@@ -45,4 +45,4 @@ class ConcreteScale:
                 first_fret,
                 idx in (0, len(self.scale_def)-1)
             )
-        fretboard_drawer.save(f'/images/{self.name}_{self.path_safe_key}.png')
+        fretboard_drawer.save(f'/images/{self.name.lower()}_{self.path_safe_key}.png')

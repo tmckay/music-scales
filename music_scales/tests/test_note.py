@@ -14,10 +14,10 @@ def test_note_equality():
 
 def test_normalize_note_str():
     note = Note('c')
-    assert note._normalize_note_str('c#') == 'c♯'
-    assert note._normalize_note_str('cb') == 'c♭'
-    assert note._normalize_note_str('c sharp') == 'c♯'
-    assert note._normalize_note_str('c flat') == 'c♭'
+    assert note._normalize_note_str('d#') == 'd♯'
+    assert note._normalize_note_str('eb') == 'e♭'
+    assert note._normalize_note_str('f sharp') == 'f♯'
+    assert note._normalize_note_str('g flat') == 'g♭'
 
 
 def test_note_hashable():
