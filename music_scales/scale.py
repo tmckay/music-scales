@@ -4,6 +4,7 @@ from typing import List, Tuple
 
 from .constants import Degree, DEGREES, NOTES
 from .note import Note
+from .note_iterator import NoteIterator
 
 
 class Scale:
@@ -42,15 +43,14 @@ class Scale:
         Args:
             key: the key of the scale to generate e.g. 'c' or 'd'
         """
-        if key not in NOTES:
-            raise ValueError(f'"{key}" is not a valid key')
-
-        notes_idx = NOTES.index(key)
+        note_iterator = NoteIterator(key)
         intervals_idx = 0
 
         key_notes = []
         # Add first note / key of scale
-        key_notes.append((NOTES[notes_idx], DEGREES[intervals_idx]))
+        key_notes.append(
+            (next(note_iterator), DEGREES[intervals_idx])
+        )
 
         for step in self.intervals:
 
@@ -58,12 +58,11 @@ class Scale:
                 raise ValueError(f'Incorrect value "{step}" for scale interval')
 
             next_step = self.interval_to_steps[step]
-            notes_idx += next_step
+            for ii in range(next_step):
+                next_note = next(note_iterator)
             intervals_idx += next_step
 
-            notes_idx = notes_idx % len(NOTES)
-
-            key_notes.append((NOTES[notes_idx], DEGREES[intervals_idx]))
+            key_notes.append((next_note, DEGREES[intervals_idx]))
 
         return key_notes
 

@@ -12,3 +12,8 @@ def test_note_iterator():
             assert note == Note('c#')
         else:
             break
+
+def test_note_iterator_next():
+    note_iterator = NoteIterator(Note('d#'))
+
+    assert next(note_iterator) == Note('d#')

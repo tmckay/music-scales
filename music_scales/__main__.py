@@ -1,4 +1,4 @@
-"""Runs example code for music_scales package"""
+'''Runs example code for music_scales package'''
 
 import argparse
 
