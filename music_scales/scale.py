@@ -2,7 +2,7 @@
 
 from typing import List, Tuple
 
-from .constants import Degree, DEGREES, NOTES
+from .constants import Degree, DEGREES
 from .note import Note
 from .note_iterator import NoteIterator
 
@@ -58,7 +58,7 @@ class Scale:
                 raise ValueError(f'Incorrect value "{step}" for scale interval')
 
             next_step = self.interval_to_steps[step]
-            for ii in range(next_step):
+            for _ in range(next_step):
                 next_note = next(note_iterator)
             intervals_idx += next_step
 

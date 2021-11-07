@@ -1,3 +1,4 @@
+'''Provides an iterator that loops through intervals / degrees'''
 from .constants import Degree, DEGREES
 
 
