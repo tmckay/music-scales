@@ -21,7 +21,7 @@ def _find_scale(search_term):
 
 def main():
     args = _get_args()
-    
+
     scale = _find_scale(args.scale)
 
     print(scale.in_key(Note(args.key)))
