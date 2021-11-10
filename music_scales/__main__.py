@@ -45,7 +45,6 @@ def run_demo():
 def run_web():
     """Run code to generate web site"""
     fret_board = Fretboard()
-    fret_board._build_note_cache()
 
     for scale in SCALES:
         for note in NOTES:

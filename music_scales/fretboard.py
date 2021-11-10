@@ -33,6 +33,8 @@ class Fretboard:
         self.number_frets = number_frets
         self._note_cache: Dict = {}
 
+        self._build_note_cache()
+
     @staticmethod
     def find_fret_for_note(
         open_note: Note,
