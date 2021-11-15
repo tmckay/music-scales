@@ -41,6 +41,19 @@ class Degree(Enum):
     MINOR_SEVENTH = 'minor seventh'
     MAJOR_SEVENTH = 'major seventh'
     OCTAVE = 'octave'
+    MINOR_NINTH = 'minor ninth'
+    MAJOR_NINTH = 'major ninth'
+    MINOR_TENTH = 'minor tenth'
+    MAJOR_TENTH = 'major tenth'
+    PERFECT_ELEVENTH = 'perfect eleventh'
+    DIMINISHED_TWELFTH = 'diminished twelfth'
+    PERFECT_TWELFTH = 'perfect twelfth'
+    MINOR_THIRTEENTH = 'minor thirteenth'
+    MAJOR_THIRTEENTH = 'major thirteenth'
+    MINOR_FOURTEENTH = 'minor fourteenth'
+    MAJOR_FOURTEENTH = 'major fourteenth'
+    PERFECT_FIFTEENTH = 'perfect fifteenth'
+    AUGMENTED_FIFTEENTH = 'augmented fifteenth'
 
 
 DEGREES = (
